@@ -22,7 +22,7 @@ from pathlib import Path
 
 
 class Trainer():
-    def __init__(self, working_dir, training_dir, testing_dir, label_path, model_name):
+    def __init__(self, working_dir, training_dir, testing_dir, label_path, model_name, epoch, learning_rate):
         self.root_dir = working_dir
         self.train_dir = self.root_dir+training_dir
         self.test_dir = self.root_dir+testing_dir
@@ -54,6 +54,9 @@ class Trainer():
         self.load_model()
 
         self.model_name = model_name
+
+        self.epoch = epoch
+        self.learning_rate = learning_rate
 
     def load_model(self):
         # load pretrained model
@@ -121,13 +124,14 @@ class Trainer():
 
         model.fc = classifier
         criterion = nn.CrossEntropyLoss()
-        optimizer = optim.SGD(model.parameters(), lr=0.008, momentum=0.9)
+        optimizer = optim.SGD(model.parameters(),
+                              lr=self.learning_rate, momentum=0.9)
         sched = optim.lr_scheduler.ReduceLROnPlateau(optimizer,
                                                      mode='max',
                                                      patience=3,
                                                      threshold=0.9)
 
-        epochs = 70
+        epochs = self.epoch
         # model.load_state_dict(torch.load(self.model_name))
         model.to(device)
         model, train_results, valid_results = self.train_model(

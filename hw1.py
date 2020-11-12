@@ -17,14 +17,17 @@ if __name__ == '__main__':
                         type=bool, dest='is_train', help='train')
     parser.add_argument('-p', '--predict', default=True,
                         type=bool, dest='is_predict', help='predict')
+    parser.add_argument('-e', '--epochs', default=60,
+                        type=int, dest='epoch', help='num of epoch')
+    parser.add_argument('-lr', '--learning_rate', default=0.01,
+                        type=int, dest='learning_rate', help='set learning rate')
     parser.add_argument('-d', '--device', default=None, type=str)
 
     args = parser.parse_args()
 
-    print(args.is_train)
-
     trainer = Trainer(args.working_dir, args.training_dir,
-                      args.testing_dir, args.label_path, args.model_name)
+                      args.testing_dir, args.label_path, args.model_name,
+                      args.epoch, args.learning_rate)
 
     if args.is_train:
         trainer.train()

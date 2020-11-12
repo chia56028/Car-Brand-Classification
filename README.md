@@ -63,7 +63,7 @@ train/
 ```
 usage: hw1.py [-h] [-r WORKING_DIR] [-tr TRAINING_DIR] [-te TESTING_DIR]
               [-l LABEL_PATH] [-n MODEL_NAME] [-t IS_TRAIN] [-p IS_PREDICT]
-              [-d DEVICE]
+              [-e EPOCH] [-lr LEARNING_RATE] [-d DEVICE]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -81,6 +81,10 @@ optional arguments:
                         train
   -p IS_PREDICT, --predict IS_PREDICT
                         predict
+  -e EPOCH, --epochs EPOCH
+                        num of epoch
+  -lr LEARNING_RATE, --learning_rate LEARNING_RATE
+                        set learning rate
   -d DEVICE, --device DEVICE
 ```
 
